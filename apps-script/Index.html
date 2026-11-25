@@ -1,0 +1,1595 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141c18"><meta name="color-scheme" content="dark">
+<title>마장동 사천본점 · 운영 일지</title><link rel="icon" href="data:,">
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #141c18;
+  --panel: #202a23;
+  --surface: #2a372b;
+  --line: #415143;
+  --paper: #f2efe4;
+  --muted: #bbc8b7;
+  --sage: #bdd3ab;
+  --orange: #f5a26e;
+  --input: #19221c;
+  background: var(--bg);
+  color: var(--paper);
+  font: 16px/1.52 Inter,Pretendard,"Malgun Gothic",system-ui,sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,h1,h2,h3,h4,p,dl,dd {
+  margin: 0;
+}
+
+[hidden] {
+  display: none!important;
+}
+
+h1,h2,h3,h4 {
+  line-height: 1.22;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(1.8rem,4.4vw,3.4rem);
+}
+
+h2 {
+  font-size: clamp(1.4rem,2.8vw,2rem);
+}
+
+h3 {
+  font-size: 1.12rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+.wrap {
+  width: min(100% - 3rem,71rem);
+  margin: auto;
+}
+
+a {
+  color: var(--sage);
+  text-underline-offset: .24em;
+}
+
+a:hover {
+  color: #eff7d9;
+}
+
+button,a,input,select,textarea {
+  touch-action: manipulation;
+}
+
+button,input,select,textarea {
+  font: inherit;
+}
+
+button,select {
+  cursor: pointer;
+}
+
+button {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: .62rem;
+  background: var(--surface);
+  color: var(--paper);
+  font-weight: 650;
+  padding: .5rem .88rem;
+}
+
+button:hover {
+  border-color: var(--sage);
+}
+
+button:disabled {
+  opacity: .55;
+  cursor: default;
+}
+
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: .5rem;
+  top: .5rem;
+  transform: translateY(-180%);
+  z-index: 5;
+  padding: .7rem;
+  background: var(--panel);
+}
+
+.skip:focus {
+  transform: none;
+}
+
+.mast {
+  border-bottom: 1px solid var(--line);
+}
+
+.mast-in,.brand,.sync-tools,.heading,.account,.datebar,.date-actions,.cardhead,.pagehead,footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.mast-in {
+  min-height: 4rem;
+}
+
+.brand {
+  justify-content: start;
+  gap: .7rem;
+}
+
+.brand b,.brand small {
+  display: block;
+  line-height: 1.3;
+}
+
+.brand b {
+  font-size: .87rem;
+  letter-spacing: .13em;
+}
+
+.brand small {
+  color: var(--muted);
+  font-size: .68rem;
+  letter-spacing: .17em;
+}
+
+.seal {
+  width: 2.35rem;
+  height: 2.35rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--sage);
+  border-radius: 50%;
+  color: var(--sage);
+  font: 1.55rem Georgia,serif;
+}
+
+.sync-tools {
+  font-size: .84rem;
+}
+
+.sync-tools span {
+  color: var(--orange);
+}
+
+.heading {
+  padding: 1.55rem 0 .95rem;
+}
+
+.kicker {
+  color: var(--sage);
+  font-weight: 750;
+  font-size: .83rem;
+  margin-bottom: .35rem;
+}
+
+.account,.help,#synced,footer,.list small,.row small,.dim {
+  color: var(--muted);
+  font-size: .89rem;
+}
+
+.datebar {
+  justify-content: start;
+  flex-wrap: wrap;
+  padding: .5rem 0 1rem;
+}
+
+.datebar label,.account label,.pagehead label {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.datebar input {
+  width: auto;
+}
+
+.date-actions {
+  gap: .3rem;
+}
+
+.date-actions button {
+  min-width: 44px;
+}
+
+.datebar p {
+  margin-left: auto;
+}
+
+.account select,.pagehead select {
+  width: auto;
+}
+
+nav {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: .45rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: .4rem 0;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  min-height: 48px;
+  border: 1px solid transparent;
+  border-radius: .55rem;
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+nav a:hover {
+  background: var(--surface);
+}
+
+nav a[aria-current] {
+  background: #344632;
+  color: var(--paper);
+  border-color: #647b5e;
+}
+
+nav svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.page {
+  padding: 1.2rem 0;
+}
+
+.pagehead {
+  margin-bottom: .85rem;
+}
+
+.pagehead a,.cardhead a {
+  font-size: .85rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0,1.6fr) minmax(0,1fr);
+  gap: .85rem;
+  align-items: start;
+}
+
+.equal {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+}
+
+.card {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--panel);
+  padding: clamp(1rem,2.5vw,1.6rem);
+}
+
+.card+.card:not(.columns>.card),.columns+.card {
+  margin-top: .85rem;
+}
+
+.accent {
+  background: #293729;
+  border-color: #586f52;
+}
+
+.card h3+.help,.verdict p {
+  margin-top: .45rem;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: .65rem;
+  margin: .85rem 0;
+}
+
+.kpi {
+  padding: .8rem .95rem;
+  border: 1px solid var(--line);
+  border-radius: .7rem;
+  background: var(--panel);
+  min-width: 0;
+}
+
+.kpi b,.mini b {
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi b {
+  font-size: clamp(1.2rem,2.5vw,1.85rem);
+  letter-spacing: -.045em;
+}
+
+.kpi small {
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.help {
+  margin: .45rem 0;
+}
+
+.legend {
+  display: flex;
+  gap: 1rem;
+  color: var(--muted);
+  font-size: .84rem;
+  margin: .7rem 0;
+}
+
+.legend span:before {
+  content: "";
+  width: .8rem;
+  height: .5rem;
+  display: inline-block;
+  margin-right: .35rem;
+  border-radius: 2px;
+  background: var(--sage);
+}
+
+.legend .actual:before {
+  background: var(--orange);
+}
+
+.row,.entry,.schedule {
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.row:last-child,.entry:last-child,.schedule:last-child {
+  border: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .65rem;
+}
+
+.row a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.entry strong,.entry small,.schedule small {
+  display: block;
+}
+
+.entry p {
+  white-space: pre-line;
+  margin: .25rem 0;
+}
+
+.axis {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  font-size: .78rem;
+}
+
+.track {
+  position: relative;
+  background: #37453a;
+  height: 7px;
+  margin: .36rem 0;
+  border-radius: 4px;
+}
+
+.track i {
+  position: absolute;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--sage);
+}
+
+.track.run i {
+  background: var(--orange);
+}
+
+.subsection,.verdict {
+  margin-top: 1rem;
+}
+
+.subsection,form#approval {
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+form {
+  margin-top: .95rem;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: .8rem;
+}
+
+.fields.three {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+}
+
+.wide {
+  grid-column: 1/-1;
+}
+
+label {
+  display: grid;
+  gap: .32rem;
+  min-width: 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+input,select,textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  background: var(--input);
+  color: var(--paper);
+  border: 1px solid #677767;
+  border-radius: .48rem;
+  padding: .48rem .62rem;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+form>button {
+  margin-top: 1rem;
+}
+
+.primary {
+  background: var(--sage);
+  color: #19261b;
+  border-color: var(--sage);
+}
+
+.primary:hover {
+  background: #d2e2c5;
+}
+
+.check {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  min-height: 44px;
+  line-height: 1.45;
+  margin: .65rem 0;
+}
+
+.check input {
+  min-height: 0;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  accent-color: var(--sage);
+}
+
+fieldset {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: .55rem;
+  padding: .75rem;
+}
+
+legend {
+  color: var(--sage);
+  font-weight: 700;
+}
+
+.meals {
+  margin: .65rem 0 1rem;
+}
+
+.verdict {
+  background: #30412e;
+  border-left: 3px solid var(--sage);
+  padding: .8rem;
+}
+
+.verdict.hold {
+  background: #3a3227;
+  border-color: var(--orange);
+}
+
+.mini {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  margin: .75rem 0;
+}
+
+.mini span {
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.mini b {
+  font-size: 1rem;
+  color: var(--paper);
+}
+
+#feedback:not(:empty),#problem {
+  margin-top: .7rem;
+  padding: .6rem .85rem;
+  background: #293d2c;
+  border-left: 3px solid var(--sage);
+  overflow-wrap: anywhere;
+}
+
+#problem {
+  background: #402e25;
+  border-color: var(--orange);
+  color: #ffdbbe;
+}
+
+.recovery button {
+  margin: .4rem .4rem 0 0;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 1rem 0 2rem;
+  flex-wrap: wrap;
+  font-size: .8rem;
+}
+
+.list {
+  margin-top: .6rem;
+}
+
+.page,.entry {
+  scroll-margin: 1rem;
+}
+
+p,label,.row,.kpi,h3 {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+@media(max-width:850px) {
+  .columns,.columns.equal {
+    grid-template-columns: 1fr;
+  }
+  .kpis {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+  .wrap {
+    width: calc(100% - 2rem);
+  }
+}
+
+@media(max-width:620px) {
+  .wrap {
+    width: calc(100% - 1.5rem);
+  }
+  .mast-in {
+    min-height: 3.5rem;
+  }
+  .heading {
+    align-items: start;
+    gap: .5rem;
+    flex-wrap: wrap;
+    padding: 1.1rem 0 .5rem;
+  }
+  .account {
+    font-size: .8rem;
+  }
+  .datebar {
+    gap: .4rem;
+  }
+  .datebar p {
+    margin-left: 0;
+    flex-basis: 100%;
+    font-size: .8rem;
+  }
+  .datebar label {
+    gap: .3rem;
+  }
+  .date-actions button {
+    padding: .35rem .5rem;
+  }
+  .datebar input {
+    width: 9.6rem;
+  }
+  .fields.three {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+  nav {
+    position: fixed;
+    z-index: 3;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #1d271f;
+    padding: .3rem .3rem calc(.3rem + env(safe-area-inset-bottom));
+    gap: .15rem;
+  }
+  nav a {
+    flex-direction: column;
+    gap: .16rem;
+    min-height: 51px;
+    font-size: .76rem;
+  }
+  nav svg {
+    width: 20px;
+    height: 20px;
+  }
+  body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+  html {
+    scroll-padding-bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+  form>button {
+    width: 100%;
+  }
+  .page {
+    padding-top: .85rem;
+  }
+  .kpi {
+    padding: .65rem .8rem;
+  }
+  .pagehead {
+    gap: .45rem;
+  }
+  .pagehead label {
+    font-size: .8rem;
+  }
+  .pagehead select {
+    max-width: 6rem;
+  }
+}
+
+@media(max-width:420px) {
+  .fields.three {
+    grid-template-columns: 1fr;
+  }
+  .meals .fields {
+    grid-template-columns: 1fr 1fr;
+  }
+  .datebar label {
+    font-size: .83rem;
+  }
+  .sync-tools {
+    gap: .4rem;
+  }
+  .account label {
+    font-size: .8rem;
+  }
+  .heading .account {
+    flex-wrap: wrap;
+  }
+  .card {
+    padding: .9rem;
+  }
+  .page .fields {
+    column-gap: .55rem;
+  }
+  .account #account:has(+ #demo-role-label:not([hidden])) {
+    display: none;
+  }
+}
+
+summary {
+  min-height: 44px;
+  padding: .55rem 0;
+  cursor: pointer;
+  color: var(--sage);
+}
+
+summary:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.account {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+#account {
+  overflow-wrap: anywhere;
+}
+
+.notice {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--bg);
+}
+
+.notice:has(#problem:not([hidden])) {
+  box-shadow: 0 2px 0 var(--line);
+}
+
+</style><script>document.addEventListener("DOMContentLoaded",function(){
+(function(){
+"use strict";
+const modules=Object.create(null);
+modules["src/config.mjs"] = (function(){
+const site = { name: '마장동 사천본점', pilot: 'majang-sacheon', demo: 'demo-majang' };
+const channels = { daangn: '당근', naver: '네이버', google: 'Google' };
+const roles = { owner: '대표', mashcore: 'Mashcore' };
+const choices = { keep: '유지 검토', revise: '수정 검토', hold: '판단 유보' };
+const types = { plan: '계획', run: '집행 기록', report: '광고 실적', close: '영업 마감', opinion: '의견', decision: '공동 판단', approval: '대표 검토' };
+const engineVersion = 'majang.flow/0.5.0';
+const closeFields = ['lunchTeams', 'lunchRevenue', 'dinnerTeams', 'dinnerRevenue', 'minutes', 'margin', 'extraCost'];
+
+function seoulDay(now = new Date()) {
+  return new Date(now.getTime() + 9 * 3600000).toISOString().slice(0, 10);
+}
+function shiftDay(day, offset) {
+  const date = new Date(day + 'T00:00:00Z');
+  date.setUTCDate(date.getUTCDate() + offset);
+  return date.toISOString().slice(0, 10);
+}
+function periodBounds(day, period) {
+  if (period === 'week') {
+    const index = (new Date(day + 'T00:00:00Z').getUTCDay() + 6) % 7;
+    return [shiftDay(day, -index), shiftDay(day, 6 - index)];
+  }
+  if (period === 'month') {
+    const start = day.slice(0, 7) + '-01';
+    const end = new Date(start + 'T00:00:00Z');
+    end.setUTCMonth(end.getUTCMonth() + 1, 0);
+    return [start, end.toISOString().slice(0, 10)];
+  }
+  return [day, day];
+}
+
+return {site,channels,roles,choices,types,engineVersion,closeFields,seoulDay,shiftDay,periodBounds};
+})();
+modules["src/flow.mjs"] = (function(){
+const { engineVersion, periodBounds } = modules["src/config.mjs"];
+
+function last(events, type, predicate = () => true) {
+  for (let i = events.length - 1; i >= 0; i--) {
+    if (events[i].type === type && predicate(events[i])) return events[i];
+  }
+  return null;
+}
+function total(a, b) {
+  return a == null || b == null ? null : a + b;
+}
+function byDay(events, day) {
+  return events.filter(event => event.day === day);
+}
+function daily(events, day) {
+  const rows = byDay(events, day);
+  const close = last(rows, 'close');
+  const c = close?.data;
+  const runs = rows.filter(e => e.type === 'run');
+  const reports = runs.map(run => last(rows, 'report', e => e.data.runId === run.id));
+  const spends = reports.map(e => e?.data.spend);
+  const fullDay = reports.length > 0 && reports.every((e,i)=>e && e.data.from===day+'T00:00' && e.data.to===nextMidnight(day) &&
+    rows.find(p=>p.id===runs[i].data.planId)?.data.channel===e.data.channel);
+  const separateChannels = new Set(reports.map(e=>e?.data.channel)).size === reports.length;
+  return { day, rows, close, runs, reports, latestPlan: last(rows, 'plan'),
+    teams: total(c?.lunchTeams, c?.dinnerTeams), revenue: total(c?.lunchRevenue, c?.dinnerRevenue),
+    minutes: c?.minutes ?? null,
+    spend: fullDay && separateChannels && spends.every(n => n != null) ? spends.reduce((a, b) => a + b, 0) : null };
+}
+function rangeReport(events, anchor, period) {
+  const [start, end] = periodBounds(anchor, period);
+  const days = [...new Set(events.map(e => e.day).filter(d => d >= start && d <= end))].sort().reverse();
+  const rows = days.map(day => daily(events, day));
+  const totals = {};
+  for (const field of ['teams', 'revenue', 'spend', 'minutes']) {
+    const known = rows.map(row => row[field]).filter(n => n !== null);
+    totals[field] = { value: known.length ? known.reduce((a, b) => a + b, 0) : null, days: known.length };
+  }
+  return { start, end, rows, totals };
+}
+
+const reasons = {
+  run: '실제 광고 시간과 집행한 계획 버전을 먼저 기록하세요.',
+  report: '선택한 집행 건의 광고 실적이 필요합니다.',
+  channel: '집행 계획과 실적 원천의 채널이 다릅니다.',
+  period: '일 마감과 비교하려면 운영일 하루 전체의 광고 집계가 필요합니다.',
+  multiple: '하루에 여러 집행 건이 있어 방문·매출을 이 광고 하나에 귀속하기 어렵습니다.',
+  baseline: '비교일의 점심·저녁 마감 기록이 필요합니다.',
+  closing: '운영일의 점심·저녁 마감 기록이 필요합니다.',
+  missing: '광고 수치, 방문 팀, 매출 또는 비용에 미측정 항목이 있습니다.',
+  conditions: '두 날짜의 영업시간·행사·휴무 조건을 확인하세요.',
+  exposure: '노출 0회로 광고 효과를 비교할 근거가 부족합니다.',
+  unit: '팀당 매출과 양의 단위 기여액을 확인할 수 없습니다.',
+  positive: '가정 기여액이 0원 이상입니다. 현장 상황과 함께 유지 여부를 검토하세요.',
+  negative: '가정 기여액이 음수입니다. 시간·소재·예산의 수정을 검토하세요.',
+};
+
+// Keep R0.4's CPC, percentage CTR, incremental contribution and ceiling break-even.
+// An unknown operand remains null. The reporting window is independent of the ad run.
+function evidence(events, day, selection) {
+  const current = daily(events, day);
+  const base = daily(events, selection.compareDay);
+  const run = current.runs.find(r => r.id === selection.runId);
+  const plan = run && current.rows.find(e => e.type === 'plan' && e.id === run.data.planId);
+  const report = run && last(current.rows, 'report', e => e.data.runId === run.id);
+  const r = report?.data, c = current.close?.data;
+  const diff = current.teams != null && base.teams != null ? current.teams - base.teams : null;
+  const unit = current.teams > 0 && current.revenue != null && c?.margin != null
+    ? current.revenue / current.teams * c.margin / 100 : null;
+  const metrics = {
+    cpc: r?.clicks > 0 && r.spend != null ? r.spend / r.clicks : null,
+    ctr: r?.impressions > 0 && r.clicks != null ? r.clicks / r.impressions * 100 : null,
+    difference: diff, contribution: null, breakEven: null,
+  };
+  let reason;
+  if (!run || !plan) reason = 'run';
+  else if (!report) reason = 'report';
+  else if (r.channel !== plan.data.channel) reason = 'channel';
+  else if (r.from !== day + 'T00:00' || r.to !== nextMidnight(day)) reason = 'period';
+  else if (current.runs.length !== 1) reason = 'multiple';
+  else if (!base.close) reason = 'baseline';
+  else if (!current.close) reason = 'closing';
+  else if ([r.spend,r.impressions,r.clicks,current.teams,current.revenue,base.teams,base.revenue,c.margin,c.extraCost].some(x => x == null)) reason = 'missing';
+  else if (!selection.comparable) reason = 'conditions';
+  else if (r.impressions === 0) reason = 'exposure';
+  else if (!(unit > 0)) reason = 'unit';
+  else {
+    metrics.contribution = diff * unit - r.spend - c.extraCost;
+    metrics.breakEven = Math.ceil((r.spend + c.extraCost) / unit);
+    reason = metrics.contribution >= 0 ? 'positive' : 'negative';
+  }
+  const suggested = reason === 'positive' ? 'keep' : reason === 'negative' ? 'revise' : 'hold';
+  const snapshot = e => e ? { id:e.id, version:e.version, planRevision:e.snapshot?.planRevision ?? null, at:e.updatedAt, data:{...e.data} } : null;
+  return { engineVersion, suggested, reason, description: reasons[reason], metrics, day,
+    compareDay: selection.compareDay, comparable: selection.comparable,
+    plan: snapshot(plan), run: snapshot(run), report: snapshot(report),
+    close: snapshot(current.close), baseline: snapshot(base.close) };
+}
+function nextMidnight(day) {
+  const d = new Date(day + 'T00:00:00Z');
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10) + 'T00:00';
+}
+
+return {last,total,byDay,daily,rangeReport,reasons,evidence,nextMidnight};
+})();
+modules["src/ledger.mjs"] = (function(){
+const { channels, choices, closeFields, roles, site, types } = modules["src/config.mjs"];
+const { byDay, evidence, last } = modules["src/flow.mjs"];
+
+function fail(code, message) {
+  throw new Error('[' + code + '] ' + message);
+}
+function check(ok, message) { if (!ok) fail('INVALID', message); }
+function validDay(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const d = new Date(value + 'T00:00:00Z');
+  return Number.isFinite(d.getTime()) && d.toISOString().slice(0,10) === value;
+}
+function key(value) { return typeof value === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,79}$/.test(value); }
+function known(table,value) { return typeof value==='string' && Object.hasOwn(table,value); }
+function shape(obj, keys) {
+  check(obj && typeof obj === 'object' && !Array.isArray(obj) &&
+    Object.keys(obj).length === keys.length && keys.every(k => Object.hasOwn(obj,k)), '요청 항목과 형식을 확인하세요.');
+}
+function number(value, max, decimal = false) {
+  check(value === null || (Number.isFinite(value) && value >= 0 && value <= max &&
+    Number.isInteger(decimal ? value * 10 : value)), '숫자 범위를 확인하세요. 미측정은 빈칸으로 둡니다.');
+}
+function textValue(value, limit) { check(typeof value === 'string' && value.trim() && value.length <= limit, '필수 문구와 글자 수를 확인하세요.'); }
+function time(value) { return typeof value === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(value); }
+function windowTimes(d) { check(time(d.start) && (time(d.end) || d.end === '24:00') && d.start < d.end, '종료 시각을 시작 이후로 입력하세요.'); }
+function dateTime(v) { return typeof v === 'string' && v.length === 16 && v[10] === 'T' && validDay(v.slice(0,10)) && time(v.slice(11)); }
+function same(a,b) {
+  if (a === b) return true;
+  if (!a || !b || typeof a !== 'object' || typeof b !== 'object') return false;
+  const keys = Object.keys(a);
+  return keys.length === Object.keys(b).length && keys.every(k => Object.hasOwn(b,k) && same(a[k],b[k]));
+}
+function authorize(actor, mode, businessId) {
+  if (!actor || !key(actor.id) || !known(roles,actor.role) || !['demo','pilot'].includes(mode) ||
+      actor.mode !== mode || actor.businessId !== businessId || site[mode] !== businessId) {
+    fail('AUTH','승인된 사용자와 사업장을 확인하세요.');
+  }
+}
+const fields = {
+  plan: ['channel','creative','hypothesis','start','end','budget'],
+  run: ['planId','start','end'],
+  report: ['runId','channel','from','to','spend','impressions','clicks'],
+  close: closeFields,
+  opinion: ['note'],
+  decision: ['runId','compareDay','baselineId','comparable','choice','note'],
+  approval: ['decisionId','status','note'],
+};
+// Validate the stored envelope and links without recomputing historical decisions.
+function verifyJournal(events, mode, businessId) {
+  const seen=new Map(), versions=new Map(), planRevisions=new Map(), closes=new Map(), reports=new Map();
+  const bad=()=>fail('CORRUPT','원장 행 또는 연결된 기록이 누락됐습니다. 저장소를 확인하세요.');
+  if (!Array.isArray(events)) bad();
+  for (const e of events) {
+    if (!e || !key(e.id) || seen.has(e.id) || e.businessId!==businessId || e.mode!==mode || !validDay(e.day) ||
+        !key(e.actorId) || !known(roles,e.role) || !Number.isFinite(Date.parse(e.updatedAt)) ||
+        e.version!==(versions.get(e.day) || 0)+1 || !known(fields,e.type)) bad();
+    try { validateData(e.type,e.data,e.day); } catch { bad(); }
+    const s=e.snapshot;
+    if (e.type==='plan') {
+      if (s?.planRevision !== (planRevisions.get(e.day) || 0)+1) bad();
+      planRevisions.set(e.day,s.planRevision);
+    }
+    if (e.type==='run' || e.type==='report' || e.type==='approval') {
+      const [id,type]=e.type==='run'?[e.data.planId,'plan']:e.type==='report'?[e.data.runId,'run']:[e.data.decisionId,'decision'];
+      const parent=seen.get(id);
+      if(parent?.type!==type || parent.day!==e.day) bad();
+      if(e.type==='approval' && e.role!=='owner') bad();
+      if(e.type!=='approval' && (s?.planRevision!==parent.snapshot.planRevision || s?.planId!==(type==='plan'?parent.id:parent.data.planId))) bad();
+    }
+    if (e.type==='close') closes.set(e.day,e);
+    if (e.type==='report') reports.set(e.data.runId,e);
+    if (e.type==='decision') {
+      const d=e.data, run=seen.get(d.runId), baseline=closes.get(d.compareDay);
+      if (!s?.engineVersion || !known(choices,s.suggested) || !s.metrics || typeof s.description!=='string' ||
+          s.day!==e.day || s.compareDay!==d.compareDay || s.comparable!==d.comparable ||
+          (baseline?.id ?? null)!==d.baselineId || (d.runId!==null && (run?.type!=='run' || run.day!==e.day))) bad();
+      for (const metric of ['cpc','ctr','difference','contribution','breakEven']) {
+        if (s.metrics[metric]!==null && !Number.isFinite(s.metrics[metric])) bad();
+      }
+      const sources={plan:seen.get(run?.data.planId),run,report:reports.get(d.runId),close:closes.get(e.day),baseline};
+      for (const [field,source] of Object.entries(sources)) {
+        const saved=s[field];
+        if (!source) { if(saved!==null) bad(); continue; }
+        if (saved?.id!==source.id || saved.version!==source.version || saved.at!==source.updatedAt ||
+            saved.planRevision!==(source.snapshot?.planRevision ?? null) || !same(saved.data,source.data)) bad();
+      }
+    }
+    seen.set(e.id,e);versions.set(e.day,e.version);
+  }
+}
+function target(rows,id,type) {
+  const e = rows.find(row => row.id === id && row.type === type);
+  check(e, '같은 영업일의 대상 기록을 선택하세요.');
+  return e;
+}
+
+function validateData(type,d,day) {
+  shape(d, fields[type]);
+  switch (type) {
+    case 'plan':
+      check(known(channels,d.channel),'계획 채널을 선택하세요.');
+      textValue(d.creative,100); textValue(d.hypothesis,300); windowTimes(d);
+      number(d.budget,10000000); check(d.budget !== null,'계획 예산을 입력하세요.');
+      break;
+    case 'run':
+      check(key(d.planId),'집행 당시 계획을 선택하세요.'); windowTimes(d);
+      break;
+    case 'report':
+      check(key(d.runId) && known(channels,d.channel),'집행과 성과 원천 채널을 선택하세요.');
+      check(dateTime(d.from) && dateTime(d.to) && d.from < d.to, '광고 실적 집계 시작과 종료를 확인하세요.');
+      for (const k of ['spend','impressions','clicks']) number(d[k],100000000);
+      check([d.spend,d.impressions,d.clicks].some(v=>v!==null),'실측한 광고 수치를 하나 이상 입력하세요.');
+      check(d.clicks === null || d.impressions === null || d.clicks <= d.impressions,'클릭 수는 노출 수 이하여야 합니다.');
+      break;
+    case 'close':
+      for (const k of closeFields) {
+        const max = {lunchTeams:100000,dinnerTeams:100000,minutes:1440,margin:100}[k] ?? 100000000;
+        number(d[k],max,k === 'margin');
+      }
+      check(closeFields.some(k=>d[k]!==null),'실측한 마감 항목을 하나 이상 입력하세요.');
+      for (const meal of ['lunch','dinner']) check(d[meal+'Teams'] !== 0 || !(d[meal+'Revenue'] > 0),'방문 0팀인 구간의 매출을 확인하세요.');
+      break;
+    case 'opinion': textValue(d.note,500); break;
+    case 'decision':
+      check((d.runId===null || key(d.runId)) && (d.baselineId===null || key(d.baselineId)) && known(choices,d.choice),'검토할 집행·비교 마감·판단을 확인하세요.');
+      check(validDay(d.compareDay) && d.compareDay<day && typeof d.comparable==='boolean','앞선 비교일과 영업 조건을 확인하세요.');
+      textValue(d.note,500);
+      break;
+    case 'approval':
+      check(key(d.decisionId) && ['approved','deferred'].includes(d.status),'판단과 승인 상태를 선택하세요.');
+      textValue(d.note,300);
+      break;
+  }
+}
+
+// The host serializes calls and appends exactly one returned event before acknowledging.
+function prepare(events, cmd, actor, updatedAt) {
+  shape(cmd, ['id','businessId','mode','day','expected','type','data']);
+  authorize(actor, cmd.mode, cmd.businessId);
+  check(key(cmd.id) && validDay(cmd.day) && Number.isSafeInteger(cmd.expected) && cmd.expected >= 0, '저장 ID·영업일·버전을 확인하세요.');
+  check(known(types,cmd.type), '기록 종류를 확인하세요.');
+  if (cmd.type === 'approval' && actor.role !== 'owner') fail('FORBIDDEN','대표만 승인 또는 보류할 수 있습니다.');
+  const d=cmd.data;
+  const existing=events.find(e => e.id === cmd.id);
+  if (existing) {
+    if (existing.actorId !== actor.id || existing.mode !== cmd.mode || existing.businessId !== cmd.businessId ||
+      existing.day !== cmd.day || existing.type !== cmd.type || existing.version !== cmd.expected+1 || !same(existing.data,d)) {
+      fail('ID_CONFLICT','다른 요청에 사용된 저장 ID입니다.');
+    }
+    return {event:existing,replay:true};
+  }
+  validateData(cmd.type,d,cmd.day);
+  const scoped=events.filter(e=>e.mode===actor.mode && e.businessId===actor.businessId);
+  const rows=byDay(scoped,cmd.day);
+  if (cmd.expected!==rows.length) fail('CONFLICT','다른 저장이 먼저 반영됐습니다. 동기화 후 입력값을 확인하세요.');
+  let snapshot=null, previous=null;
+  switch (cmd.type) {
+    case 'plan':
+      previous=last(rows,'plan');
+      snapshot={planRevision:rows.filter(e=>e.type==='plan').length+1};
+      break;
+    case 'run': {
+      const plan=target(rows,d.planId,'plan');
+      check(!rows.some(e=>e.type==='run' && e.data.planId===d.planId),'이 계획 버전의 집행은 이미 기록됐습니다.');
+      snapshot={planId:plan.id,planRevision:plan.snapshot.planRevision};
+      break;
+    }
+    case 'report': {
+      const run=target(rows,d.runId,'run');
+      check(d.from<cmd.day+'T'+run.data.end && d.to>cmd.day+'T'+run.data.start,'집계 기간과 실제 집행 시간이 겹쳐야 합니다.');
+      snapshot={planId:run.data.planId,planRevision:run.snapshot.planRevision};
+      previous=last(rows,'report',e=>e.data.runId===d.runId);
+      break;
+    }
+    case 'close': previous=last(rows,'close'); break;
+    case 'opinion': previous=last(rows,'opinion',e=>e.actorId===actor.id); break;
+    case 'decision': {
+      if (d.runId!==null) target(rows,d.runId,'run');
+      snapshot=evidence(scoped,cmd.day,d);
+      if ((snapshot.baseline?.id ?? null)!==d.baselineId) fail('CONFLICT','비교일 마감이 변경됐습니다. 동기화 후 다시 검토하세요.');
+      check(snapshot.suggested!=='hold' || d.choice==='hold','근거가 부족해 판단 유보만 기록할 수 있습니다.');
+      const prior=last(rows,'decision',e=>e.actorId===actor.id);
+      if(prior && same(prior.snapshot,snapshot)) previous=prior;
+      break;
+    }
+    case 'approval':
+      target(rows,d.decisionId,'decision');
+      check(!last(rows,'approval',e=>e.data.decisionId===d.decisionId),'이미 대표 검토가 끝난 판단입니다.');
+      break;
+  }
+  if (previous && same(previous.data,d)) fail('UNCHANGED','이미 같은 내용이 기록되어 있습니다.');
+  return {replay:false, event:{ id:cmd.id, businessId:actor.businessId, mode:actor.mode, day:cmd.day,
+    version:rows.length+1, type:cmd.type, data:{...d}, actorId:actor.id, role:actor.role, updatedAt, snapshot }};
+}
+
+return {fail,validDay,authorize,fields,verifyJournal,prepare};
+})();
+modules["src/demo.mjs"] = (function(){
+const { site, shiftDay, seoulDay } = modules["src/config.mjs"];
+const { prepare, verifyJournal } = modules["src/ledger.mjs"];
+const { nextMidnight } = modules["src/flow.mjs"];
+
+const demoKey = 'mashcore.localflow.r05.demo.events.v1';
+function demoActor(role) {
+  return {id: role === 'owner' ? 'demo-owner' : 'demo-mashcore', role, mode:'demo', businessId:site.demo};
+}
+function demoSeed(today = seoulDay()) {
+  const events = [], actor = demoActor('mashcore');
+  function add(day,id,type,data) {
+    const cmd={id,businessId:site.demo,mode:'demo',day,expected:events.filter(e=>e.day===day).length,type,data};
+    events.push(prepare(events,cmd,actor,day+'T09:00:00.000Z').event);
+  }
+  const close={lunchTeams:8,lunchRevenue:560000,dinnerTeams:10,dinnerRevenue:700000,minutes:14,margin:40,extraCost:1000};
+  add(shiftDay(today,-7),'sample-base','close',close);
+  add(today,'sample-plan','plan',{channel:'daangn',creative:'저녁 식사 전 한우 메뉴 소개',hypothesis:'저녁 메뉴를 미리 본 손님의 방문이 늘어나는지 확인한다.',start:'15:00',end:'18:00',budget:10000});
+  add(today,'sample-run','run',{planId:'sample-plan',start:'15:10',end:'17:55'});
+  add(today,'sample-report','report',{runId:'sample-run',channel:'daangn',from:today+'T00:00',to:nextMidnight(today),spend:9600,impressions:3300,clicks:44});
+  add(today,'sample-close','close',{...close,dinnerTeams:13,dinnerRevenue:910000,minutes:12});
+  return events;
+}
+function readEvents() {
+  const text=localStorage.getItem(demoKey);
+  if (text===null) return null;
+  let journal;
+  try { journal=JSON.parse(text); } catch { throw Error('[CORRUPT] 데모 원장을 읽을 수 없습니다.'); }
+  if (journal?.mode!=='demo' || journal.schema!==1) throw Error('[CORRUPT] 데모 저장 형식을 확인하세요.');
+  verifyJournal(journal.events,'demo',site.demo);
+  return journal.events;
+}
+function demoGateway(role='mashcore') {
+  const actor=demoActor(role);
+  async function transaction(command) {
+    if (!navigator.locks) throw Error('[STORE] 데모 저장에는 localhost 또는 HTTPS와 Web Locks 지원 브라우저가 필요합니다.');
+    return navigator.locks.request(demoKey,()=>{
+      const saved=readEvents(), events=saved ?? demoSeed();
+      let write=saved===null;
+      if (command) {
+        const prepared=prepare(events,command,actor,new Date().toISOString());
+        if (!prepared.replay) { events.push(prepared.event); write=true; }
+      }
+      if (write) localStorage.setItem(demoKey,JSON.stringify({schema:1,mode:'demo',events}));
+      return {ok:true,mode:'demo',businessId:site.demo,actor,events,syncedAt:new Date().toISOString(),acceptedId:command?.id ?? null};
+    });
+  }
+  return {load:()=>transaction(null),save:transaction};
+}
+
+return {demoKey,demoActor,demoSeed,demoGateway};
+})();
+modules["src/connection.mjs"] = (function(){
+const { site } = modules["src/config.mjs"];
+const { demoGateway } = modules["src/demo.mjs"];
+const { prepare, verifyJournal } = modules["src/ledger.mjs"];
+
+function rpc(method, arg) {
+  return new Promise((resolve,reject)=>{
+    const timer=setTimeout(()=>reject(Error('[STORE] 응답 지연 · 같은 요청을 다시 확인하세요.')),30000);
+    const run=google.script.run.withSuccessHandler(result=>{clearTimeout(timer);resolve(result);})
+      .withFailureHandler(error=>{clearTimeout(timer);reject(Error(error.message || '원장 응답 오류'));});
+    run[method](arg);
+  });
+}
+async function connect(demoRole) {
+  if (typeof google === 'undefined' || !google.script?.run) {
+    const gateway=demoGateway(demoRole);
+    return {gateway, initial:await gateway.load()};
+  }
+  const gateway={load:()=>rpc('loadPilot',site.pilot),save:cmd=>rpc('savePilot',cmd)};
+  const initial=await gateway.load();
+  if (initial?.ok===true && initial.mode==='demo') {
+    const demo=demoGateway(demoRole);
+    return {gateway:demo,initial:await demo.load()};
+  }
+  return {gateway,initial};
+}
+function acknowledge(reply, actor, request=null) {
+  if (reply?.ok!==true || !actor || reply.mode!==actor.mode || reply.businessId!==actor.businessId ||
+    reply.actor?.id!==actor.id || reply.actor.role!==actor.role || reply.actor.mode!==actor.mode ||
+    reply.actor.businessId!==actor.businessId || !Array.isArray(reply.events) ||
+    !Number.isFinite(Date.parse(reply.syncedAt)) || (request && (reply.acceptedId!==request.id ||
+      !reply.events.some(e=>e.id===request.id && e.actorId===actor.id && e.type===request.type && e.day===request.day)))) {
+    throw Error('[STORE] 저장소의 확인 응답이 올바르지 않습니다.');
+  }
+  verifyJournal(reply.events,actor.mode,actor.businessId);
+  if (request) {
+    try { if (!prepare(reply.events,request,actor,reply.syncedAt).replay) throw Error(); }
+    catch { throw Error('[STORE] 원장의 확인 응답과 보낸 기록이 다릅니다. 동기화 후 재확인하세요.'); }
+  }
+  return reply;
+}
+
+return {connect,acknowledge};
+})();
+modules["src/view.mjs"] = (function(){
+const { channels, choices, roles, types } = modules["src/config.mjs"];
+const { daily, last, rangeReport } = modules["src/flow.mjs"];
+const $ = id => document.getElementById(id);
+function el(tag, text, css) {
+  const n=document.createElement(tag);
+  if (text!=null) n.textContent=text;
+  if (css) n.className=css;
+  return n;
+}
+const fmt = new Intl.NumberFormat('ko-KR',{maximumFractionDigits:0});
+const timeFmt = new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false});
+const stamp = iso => timeFmt.format(new Date(iso));
+const amount = (n,unit) => n==null ? '미측정' : fmt.format(n)+unit;
+const planName = e => 'v'+e.snapshot.planRevision+' · '+e.data.creative;
+const runName = e => '계획 v'+e.snapshot.planRevision+' · '+e.data.start+'–'+e.data.end;
+function options(select, entries, selected, empty='대기 중인 기록 없음') {
+  select.replaceChildren(...(entries.length? entries:[['',empty]]).map(([id,label])=>new Option(label,id)));
+  if (entries.some(([id])=>id===selected)) select.value=selected;
+}
+function fill(form, values) {
+  for (const input of form.elements) {
+    if (!input.name || !Object.hasOwn(values,input.name)) continue;
+    if (input.type==='checkbox') input.checked=values[input.name];
+    else input.value=values[input.name] ?? '';
+  }
+}
+function readForm(form) {
+  const field={};
+  for (const x of form.elements) {
+    if (!x.name) continue;
+    if (x.type==='number') field[x.name]=x.value===''?null:x.valueAsNumber;
+    else if (x.type==='checkbox') field[x.name]=x.checked;
+    else field[x.name]=x.value.trim();
+  }
+  return field;
+}
+function cards(id,items) {
+  $(id).replaceChildren(...items.map(([label,value,sub])=>{
+    const d=el('div',null,'kpi'); d.append(el('small',label),el('b',value),el('small',sub)); return d;
+  }));
+}
+function nodeList(id,entries,empty) {
+  $(id).replaceChildren(...(entries.length?entries:[el('p',empty,'help')]));
+}
+function entry(title, desc, meta) {
+  const row=el('div',null,'entry'); row.append(el('strong',title));
+  if (desc) row.append(el('p',desc));
+  if (meta) row.append(el('small',meta));
+  return row;
+}
+function info(e) { return roles[e.role]+' · '+e.actorId+' · '+stamp(e.updatedAt); }
+function minutes(t) { const [h,m]=t.split(':').map(Number); return h*60+m; }
+function track(start,end,kind) {
+  const line=el('div',null,'track '+kind), bar=el('i');
+  line.setAttribute('aria-hidden','true');
+  bar.style.left=minutes(start)/1440*100+'%'; bar.style.width=(minutes(end)-minutes(start))/1440*100+'%';
+  line.append(bar);return line;
+}
+function dashboard(d) {
+  cards('today-kpis',[
+    ['방문 팀',amount(d.teams,'팀'),'점심 + 저녁'],['매출',amount(d.revenue,'원'),'영업일 마감'],
+    ['광고비',amount(d.spend,'원'),'하루 집계 기준'],['관리 시간',amount(d.minutes,'분'),'직접 기록'],
+  ]);
+  const plans=d.rows.filter(e=>e.type==='plan');
+  const visible=plans.filter(p=>p===d.latestPlan || d.runs.some(r=>r.data.planId===p.id));
+  const schedules=visible.map(p=>{
+    const row=el('div',null,'schedule'), run=d.runs.find(e=>e.data.planId===p.id);
+    row.append(el('strong',planName(p)),el('small',channels[p.data.channel]+' · 계획 '+p.data.start+'–'+p.data.end+' · '+amount(p.data.budget,'원'),'dim'),track(p.data.start,p.data.end,'plan'));
+    if (run) row.append(el('small','기록한 집행 '+run.data.start+'–'+run.data.end,'dim'),track(run.data.start,run.data.end,'run'));
+    return row;
+  });
+  const axis=el('div',null,'axis'); for(const t of ['00시','06시','12시','18시','24시']) axis.append(el('span',t));
+  nodeList('timeline',schedules.length?[axis,...schedules]:[],'아직 계획이 없습니다. 광고 메뉴에서 첫 계획을 저장하세요.');
+  const decision=last(d.rows,'decision');
+  const steps=[['광고 계획',d.latestPlan?planName(d.latestPlan):'작성 대기','ads'],['실제 집행',d.runs.length+'건','ads'],
+    ['광고 실적',d.reports.filter(Boolean).length+' / '+d.runs.length+'건','ads'],['현장 마감',d.close?(d.teams!=null&&d.revenue!=null?'방문·매출 입력':'부분 입력'):'입력 대기','closing'],
+    ['공동 판단',decision?choices[decision.data.choice]:'검토 대기','review']];
+  $('checklist').replaceChildren(...steps.map(([title,status,tab])=>{
+    const row=el('div',null,'row'),a=el('a',title);a.href='#'+tab;row.append(a,el('small',status));return row;
+  }));
+  nodeList('plans',plans.slice().reverse().map(p=>entry(planName(p),channels[p.data.channel]+' · '+p.data.start+'–'+p.data.end+' · '+amount(p.data.budget,'원'),info(p))),'저장된 계획이 없습니다.');
+}
+function recommendation(facts) {
+  const verdict=$('recommendation'); verdict.classList.toggle('hold',facts.suggested==='hold');
+  verdict.replaceChildren(el('strong',choices[facts.suggested]),el('p',facts.description));
+  if(facts.plan) verdict.append(el('small','집행 계획 v'+facts.plan.planRevision+' · '+facts.plan.data.creative,'dim'));
+  const m=facts.metrics;
+  const fields=[['클릭당 비용',amount(m.cpc,'원')],['클릭률',m.ctr==null?'미측정':m.ctr.toFixed(2)+'%'],
+    ['방문 차이',amount(m.difference,'팀')],['손익분기',amount(m.breakEven,'팀')],['가정 기여액',amount(m.contribution,'원')]];
+  $('evidence-metrics').replaceChildren(...fields.map(([label,v])=>{const n=el('span',label);n.append(el('b',v));return n;}));
+}
+function collaborationHistory(rows) {
+  nodeList('opinions',rows.filter(e=>e.type==='opinion').reverse().map(e=>entry(roles[e.role]+' 의견',e.data.note,info(e))),'남긴 의견이 없습니다.');
+  nodeList('decisions',rows.filter(e=>e.type==='decision').reverse().map(e=>{
+    const f=e.snapshot, approval=last(rows,'approval',a=>a.data.decisionId===e.id);
+    const n=entry(choices[e.data.choice]+' · '+(approval?(approval.data.status==='approved'?'대표 승인':'대표 보류'):'승인 대기'),e.data.note,info(e));
+    const detail=el('details');detail.append(el('summary','저장 당시 판단 근거'));
+    detail.append(el('p',f.engineVersion+' · 당시 제안 '+choices[f.suggested]+' · '+f.description),
+      el('p','비교일 '+f.compareDay+' · 가정 기여액 '+amount(f.metrics.contribution,'원')),
+      el('p',f.plan?'계획 v'+f.plan.planRevision+' · '+f.plan.data.creative+' · 예산 '+amount(f.plan.data.budget,'원'):'집행 계획 미확인'));
+    if(f.report) detail.append(el('p','실적 집계 '+f.report.data.from.replace('T',' ')+' ~ '+f.report.data.to.replace('T',' ')+' · '+amount(f.report.data.spend,'원')));
+    if(approval) detail.append(el('p','대표 검토 · '+approval.data.note+' · '+info(approval)));
+    n.append(detail);return n;
+  }),'기록한 판단이 없습니다.');
+}
+function records(events,day,period) {
+  const r=rangeReport(events,day,period);
+  $('range-title').textContent=r.start+' ~ '+r.end+' · 기록된 영업일 '+r.rows.length+'일 · 지표별 측정일 합계';
+  const labels={teams:['방문 팀','팀'],revenue:['매출','원'],spend:['광고비','원'],minutes:['관리 시간','분']};
+  cards('range-kpis',Object.entries(labels).map(([key,[name,unit]])=>[name,amount(r.totals[key].value,unit),'측정 '+r.totals[key].days+'일']));
+  nodeList('range-days',r.rows.map(d=>{
+    const row=el('div',null,'row'),b=el('button',d.day);b.type='button';b.dataset.openDay=d.day;
+    row.append(b,el('small','방문 '+amount(d.teams,'팀')+' · 매출 '+amount(d.revenue,'원')));return row;
+  }),'이 기간에 저장한 기록이 없습니다.');
+  nodeList('events',daily(events,day).rows.slice().reverse().map(e=>{
+    const d=e.data;
+    const desc={plan:()=>planName(e),run:()=>runName(e),report:()=>channels[d.channel]+' · '+amount(d.spend,'원')+' · '+d.from+' ~ '+d.to,
+      close:()=>'점심 '+amount(d.lunchTeams,'팀')+' / '+amount(d.lunchRevenue,'원')+' · 저녁 '+amount(d.dinnerTeams,'팀')+' / '+amount(d.dinnerRevenue,'원')+' · 관리 '+amount(d.minutes,'분'),
+      decision:()=>choices[d.choice]+' · '+d.note,opinion:()=>d.note,approval:()=>(d.status==='approved'?'승인':'보류')+' · '+d.note};
+    return entry(types[e.type]+' · 원장 '+e.version,desc[e.type](),info(e));
+  }),'선택한 날짜의 원장이 비어 있습니다.');
+}
+
+return {$,el,stamp,amount,planName,runName,options,fill,readForm,dashboard,recommendation,collaborationHistory,records};
+})();
+modules["src/app.mjs"] = (function(){
+const { channels, choices, closeFields, roles, seoulDay, shiftDay, types } = modules["src/config.mjs"];
+const { byDay, daily, evidence, last, nextMidnight } = modules["src/flow.mjs"];
+const { authorize, prepare, validDay } = modules["src/ledger.mjs"];
+const { acknowledge, connect } = modules["src/connection.mjs"];
+const { $, collaborationHistory, dashboard, fill, options, planName, readForm, recommendation, records, runName, stamp } = modules["src/view.mjs"];
+
+const forms=['plan','run','report','close','decision','opinion','approval'];
+const tabs=['today','ads','closing','review','records'];
+let day=seoulDay(), actor=null, events=[], gateway=null, busy=false, pending=null, conflict=null;
+let tab='today';
+const drafts=new Map(), targets=new Map();
+const scope=()=>[actor?.mode,actor?.id,day].join('/');
+const targetKey=(type)=>scope()+'/'+type;
+const formKey=type=>targetKey(type)+(type==='report'?'/'+($(type).elements.runId.value || ''):'');
+function context(type) { return drafts.get(formKey(type)); }
+function alertText(t) { $('problem').textContent=t; $('problem').hidden=!t; }
+function message(t) { $('feedback').textContent=t; }
+function current() { return daily(events,day); }
+function changeTab(focus=false) {
+  const requested=location.hash.slice(1);
+  tab=tabs.includes(requested)?requested:'today';
+  for (const id of tabs) {
+    $('page-'+id).hidden=id!==tab;
+    const link=document.querySelector('[data-tab="'+id+'"]');
+    if(id===tab) link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
+  }
+  if (focus) $('title-'+tab).focus();
+}
+function selectTarget(type,field,items,empty) {
+  const select=$(type).elements[field];
+  const wanted=targets.get(targetKey(type)) ?? items[0]?.[0];
+  options(select,items,wanted,empty);
+  targets.set(targetKey(type),select.value);
+  return select.value;
+}
+function redrawDecision() {
+  const f=$('decision'), draft=context('decision'), values=readForm(f);
+  const selection={runId:values.runId || null,compareDay:values.compareDay,comparable:values.comparable};
+  const facts=evidence(events,day,selection);
+  const selected=facts.suggested==='hold' ? 'hold' : draft?.manualChoice ?? facts.suggested;
+  options(f.elements.choice,Object.entries(choices),selected);
+  for(const option of f.elements.choice.options) option.disabled=facts.suggested==='hold' && option.value!=='hold';
+  f.elements.choice.value=selected;
+  if(draft) draft.values.choice=selected;
+  recommendation(facts);
+}
+function paint() {
+  if (!actor) return;
+  const d=current(), plans=d.rows.filter(e=>e.type==='plan').reverse();
+  const defaults=d.latestPlan?.data ?? {channel:'daangn',creative:'',hypothesis:'',start:'15:00',end:'18:00',budget:null};
+  fill($('plan'),context('plan')?.values ?? defaults);
+  const unused=plans.filter(p=>!d.runs.some(r=>r.data.planId===p.id));
+  selectTarget('run','planId',unused.map(e=>[e.id,planName(e)]),'새 계획 버전 필요');
+  const runDraft=context('run')?.values;
+  fill($('run'),runDraft && unused.some(p=>p.id===runDraft.planId)?runDraft:{start:'',end:''});
+  const matches=d.runs.slice().reverse().map(e=>[e.id,runName(e)]);
+  const runId=selectTarget('report','runId',matches,'집행 기록 필요');
+  const linked=d.runs.find(e=>e.id===runId);
+  const reported=last(d.rows,'report',e=>e.data.runId===runId);
+  const planned=plans.find(p=>p.id===linked?.data.planId);
+  fill($('report'),context('report')?.values ?? reported?.data ?? {channel:planned?.data.channel ?? 'daangn',from:day+'T00:00',to:nextMidnight(day),spend:null,impressions:null,clicks:null});
+  fill($('close'),context('close')?.values ?? d.close?.data ?? Object.fromEntries(closeFields.map(k=>[k,null])));
+  const decisionDraft=context('decision')?.values;
+  options($('decision').elements.runId,matches,decisionDraft?.runId ?? matches[0]?.[0],'집행 기록 없음');
+  fill($('decision'),decisionDraft ?? {compareDay:shiftDay(day,-7),comparable:false,note:''});
+  $('decision').elements.compareDay.max=shiftDay(day,-1);
+  redrawDecision();
+  fill($('opinion'),context('opinion')?.values ?? {note:''});
+  const open=d.rows.filter(e=>e.type==='decision'&&!d.rows.some(a=>a.type==='approval'&&a.data.decisionId===e.id)).reverse();
+  selectTarget('approval','decisionId',open.map(e=>[e.id, choices[e.data.choice]+' · '+e.data.note]),'승인 대기 판단 없음');
+  const approval=context('approval')?.values;
+  fill($('approval'),approval && open.some(e=>e.id===approval.decisionId)?approval:{status:'approved',note:''});
+  $('approval').hidden=actor.role!=='owner' || !open.length;
+  $('approval-hint').textContent=!open.length?'승인 대기 중인 판단이 없습니다.':actor.role!=='owner'?'대표 계정에서 승인 또는 보류할 수 있습니다.':'';
+  dashboard(d);collaborationHistory(d.rows);records(events,day,$('period').value);
+  controls();
+}
+function controls() {
+  for (const type of forms) {
+    const form=$(type), needsTarget=(type==='run'&&!form.elements.planId.value)||(type==='report'&&!form.elements.runId.value);
+    for (const control of form.elements) {
+      control.disabled=!actor || busy || !!pending || (type==='approval' && actor.role!=='owner') ||
+        (control.tagName==='BUTTON' && needsTarget);
+    }
+  }
+  $('sync').disabled=busy; $('demo-role').disabled=busy||!!pending;
+  for(const id of ['day','prev','next-day','today']) $(id).disabled=busy;
+  $('retry').hidden=!pending || busy; $('resolve').hidden=!conflict || busy || !!pending;
+}
+function draftFor(type, changed='') {
+  const key=formKey(type), prior=drafts.get(key);
+  const values=readForm($(type));
+  const base=type==='decision'?last(byDay(events,values.compareDay),'close')?.id ?? null:null;
+  const baselineId=prior && prior.values.compareDay===values.compareDay ? prior.baselineId : base;
+  const manualChoice=changed==='choice'?values.choice:prior?.manualChoice;
+  const draft={values, expected:prior?.expected ?? current().rows.length, baselineId, manualChoice};
+  drafts.set(key,draft);return draft;
+}
+function selectDay(value) {
+  if (!validDay(value)) { $('day').value=day;return; }
+  day=value;$('day').value=day;paint();message('');
+}
+function pendingKey(){ return 'mashcore.r05.pending.'+actor.mode+'.'+actor.businessId+'.'+actor.id; }
+function remember(value) {
+  pending=value;
+  try { if(value) sessionStorage.setItem(pendingKey(),JSON.stringify(value));else sessionStorage.removeItem(pendingKey()); } catch { /* The open tab can still retry. */ }
+}
+function accept(reply, request=null) {
+  acknowledge(reply,actor,request);
+  events=reply.events;
+  $('synced').textContent=(actor.mode==='demo'?'데모 확인 ':'마지막 동기화 ')+stamp(reply.syncedAt);
+  $('mode').textContent=actor.mode==='demo'?'데모 · 가상 원장':'실증 · Sheets';
+  $('account').textContent=roles[actor.role]+' · '+actor.id;
+  $('demo-role-label').hidden=actor.mode!=='demo';
+  $('demo-role').value=actor.role;
+}
+function setBusy(value) {busy=value;controls();}
+function closeSession() {
+  actor=null;gateway=null;events=[];pending=null;conflict=null;
+  drafts.clear();targets.clear();
+  for(const id of tabs) $('page-'+id).hidden=true;
+  $('account').textContent='';$('demo-role-label').hidden=true;$('mode').textContent='연결 제한';
+  $('synced').textContent='동기화 대기';
+}
+async function sync(initial=false) {
+  if(busy) return false;
+  setBusy(true);alertText('');message('원장을 읽는 중…');
+  try {
+    if (initial || !gateway) {
+      const c=await connect($('demo-role').value);
+      const a=c.initial?.actor;
+      authorize(a,c.initial?.mode,c.initial?.businessId);
+      acknowledge(c.initial,a);
+      actor=a;gateway=c.gateway;
+      try {pending=JSON.parse(sessionStorage.getItem(pendingKey()) || 'null');} catch {pending=null;}
+      conflict=null;
+      accept(c.initial);
+    } else accept(await gateway.load());
+    if(pending && events.some(e=>e.id===pending.id && e.actorId===actor.id)) {
+      if (!prepare(events,pending,actor,new Date().toISOString()).replay) throw Error('[STORE] 저장 요청을 대조할 수 없습니다.');
+      drafts.delete([actor.mode,actor.id,pending.day,pending.type].join('/')+(pending.type==='report'?'/'+pending.data.runId:''));
+      remember(null);message('원장에서 저장 완료를 확인했습니다.');
+    } else message(pending?'확인 대기 중인 저장 요청이 있습니다. 같은 요청으로 재시도하세요.':'');
+    paint();return true;
+  } catch(error) {
+    if(initial || /\[(AUTH|FORBIDDEN|CONFIG)\]/.test(error.message)) closeSession();
+    alertText(error.message);message('동기화 실패');return false;
+  } finally {setBusy(false);if(actor)changeTab();}
+}
+async function send(cmd,key) {
+  if(busy || !actor) return;
+  setBusy(true);remember(cmd);alertText('');message('저장 확인 중…');
+  try {
+    const reply=await gateway.save(cmd);
+    accept(reply,cmd);remember(null);conflict=null;drafts.delete(key);
+    // Rebase independent drafts after our own acknowledged append. Evidence changes
+    // still require a review of a previously drafted decision.
+    const prefix=[actor.mode,actor.id,cmd.day].join('/')+'/';
+    for (const [k,d] of drafts) if(k.startsWith(prefix) && d.expected===cmd.expected &&
+        !(k===prefix+'decision' && ['run','report','close'].includes(cmd.type))) d.expected++;
+    paint();message(types[cmd.type]+' 저장 완료 · '+(actor.mode==='demo'?'이 브라우저':'실증 원장'));
+  } catch(error) {
+    const definitive=/\[(AUTH|FORBIDDEN|INVALID|CONFLICT|ID_CONFLICT|UNCHANGED|CONFIG|CORRUPT|LIMIT)\]/.test(error.message);
+    if(definitive) remember(null);
+    if(error.message.includes('[CONFLICT]')) conflict=key;
+    if(error.message.includes('[UNCHANGED]')) drafts.delete(key);
+    if(/\[(AUTH|CONFIG)\]/.test(error.message)) closeSession();
+    alertText(error.message);message(definitive?'저장 상태를 확인하세요.':'저장 확인 대기 · 재시도는 같은 ID를 사용합니다.');
+  } finally {setBusy(false);}
+}
+async function submit(type) {
+  if (busy || pending || !actor) return;
+  const key=formKey(type), draft=context(type) ?? draftFor(type), data={...draft.values};
+  if(type==='decision') {data.runId=data.runId || null;data.baselineId=draft.baselineId;}
+  const cmd={id:crypto.randomUUID(),businessId:actor.businessId,mode:actor.mode,day,expected:draft.expected,type,data};
+  try {prepare(events,cmd,actor,new Date().toISOString());}
+  catch(e) {
+    if(e.message.includes('[CONFLICT]')) conflict=key;
+    if(e.message.includes('[UNCHANGED]')) drafts.delete(key);
+    alertText(e.message);message('');controls();return;
+  }
+  await send(cmd,key);
+}
+
+for (const f of [ $('plan'), $('report') ]) options(f.elements.channel,Object.entries(channels),'daangn');
+$('day').value=day;
+for (const type of forms) {
+  const form=$(type);
+  function edited(event) {
+    if(!actor || busy) return;
+    if(type==='report' && event.target.name==='runId') {
+      targets.set(targetKey(type),event.target.value);paint();return;
+    }
+    if(type==='decision' && ['runId','compareDay'].includes(event.target.name)) form.elements.comparable.checked=false;
+    draftFor(type,event.target.name);
+    if(type==='decision') redrawDecision();
+  }
+  form.addEventListener('input',edited);
+  form.addEventListener('change',edited);
+  form.addEventListener('submit',e=>{e.preventDefault();submit(type);});
+}
+$('day').addEventListener('change',e=>selectDay(e.target.value));
+$('prev').onclick=()=>selectDay(shiftDay(day,-1));$('next-day').onclick=()=>selectDay(shiftDay(day,1));
+$('today').onclick=()=>selectDay(seoulDay());
+$('period').onchange=()=>{if(actor)records(events,day,$('period').value);};
+$('range-days').onclick=e=>{const b=e.target.closest('[data-open-day]');if(b&&!busy){selectDay(b.dataset.openDay);location.hash='today';}};
+$('sync').onclick=()=>sync(!actor);
+$('retry').onclick=()=>{if(pending)send(pending,[actor.mode,actor.id,pending.day,pending.type].join('/')+(pending.type==='report'?'/'+pending.data.runId:''));};
+$('resolve').onclick=async()=>{const key=conflict;if(await sync()){drafts.delete(key);conflict=null;paint();message('충돌 입력을 비웠습니다. 최신 기록을 확인하세요.');}};
+$('demo-role').onchange=()=>sync(true);
+window.addEventListener('hashchange',()=>{if(actor)changeTab(true);});
+window.addEventListener('beforeunload',e=>{if(drafts.size||pending){e.preventDefault();e.returnValue=true;}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden && actor && !busy && !pending && !drafts.size) sync();});
+changeTab();sync(true);
+
+return {};
+})();
+return modules["src/app.mjs"];
+})();
+});</script>
+</head><body>
+<a class="skip" href="#main">본문으로 이동</a>
+<header class="mast"><div class="wrap mast-in"><div class="brand" translate="no"><span class="seal">M</span><span><b>MASHCORE</b><small>LOCAL FLOW</small></span></div>
+<div class="sync-tools"><span id="mode">연결 확인 중</span><button id="sync" type="button">동기화</button></div></div></header>
+<main class="wrap" id="main" tabindex="-1">
+<div class="heading"><div><p class="kicker">F&amp;B 운영 일지</p><h1>마장동 사천본점</h1></div><div class="account"><span id="account"></span><label id="demo-role-label" hidden>데모 역할<select id="demo-role"><option value="mashcore">Mashcore</option><option value="owner">대표</option></select></label></div></div>
+<div class="datebar"><label>영업일<input id="day" type="date" required></label><div class="date-actions"><button id="prev" aria-label="이전 영업일">‹</button><button id="today">오늘</button><button id="next-day" aria-label="다음 영업일">›</button></div><p id="synced">동기화 대기</p></div>
+<nav aria-label="운영 메뉴" id="nav">
+<a href="#today" data-tab="today"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12 12 4l9 8M5 11v9h14v-9M10 20v-6h4v6"/></svg>오늘</a>
+<a href="#ads" data-tab="ads"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h6l11-5v14L9 14H3zM6 14l2 6h3l-2-6"/></svg>광고</a>
+<a href="#closing" data-tab="closing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v6q3 4 6 0V3M7 3v18M19 3q-5 3-5 10h5v8M19 3v10"/></svg>마감</a>
+<a href="#review" data-tab="review"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 16 2-7 7-2-2 7z"/></svg>판단</a>
+<a href="#records" data-tab="records"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4v16h18M7 16v-4m5 4V8m5 8V5"/></svg>조회</a>
+</nav>
+<div class="notice"><div id="feedback" role="status" aria-live="polite"></div>
+<div id="problem" role="alert" hidden></div><div class="recovery"><button id="retry" hidden>같은 저장 요청 재시도</button><button id="resolve" hidden>충돌 입력을 버리고 최신본 열기</button></div></div>
+<noscript>운영 일지 사용을 위해 자바스크립트를 켜세요.</noscript>
+<section class="page" id="page-today" aria-labelledby="title-today"><div class="pagehead"><h2 id="title-today" tabindex="-1">오늘의 흐름</h2><a href="#records">기간 조회 ↗</a></div>
+<div class="kpis" id="today-kpis"></div><div class="columns">
+<article class="card"><div class="cardhead"><h3>광고 타임테이블</h3><a href="#ads">계획 편집 ↗</a></div><div class="legend"><span class="planned">광고 계획</span><span class="actual">기록한 집행</span></div><div id="timeline"></div></article>
+<aside class="card accent"><h3>영업일 체크</h3><div id="checklist"></div></aside></div></section>
+
+<section class="page" id="page-ads" aria-labelledby="title-ads" hidden><div class="pagehead"><h2 id="title-ads" tabindex="-1">광고 운영</h2></div>
+<div class="columns equal"><article class="card"><h3>소재·시간·예산 계획</h3><form id="plan" autocomplete="off"><div class="fields">
+<label>계획 채널<select name="channel"></select></label><label>계획 예산 (원)<input name="budget" type="number" min="0" max="10000000" required></label>
+<label>광고 시작<input name="start" type="time" required></label><label>광고 종료<input name="end" type="time" required></label>
+<label class="wide">소재 제목<input name="creative" maxlength="100" required></label><label class="wide">확인할 가설<textarea name="hypothesis" maxlength="300" rows="2" required></textarea></label></div>
+<button class="primary">계획 버전 저장</button></form><div class="subsection"><h4>저장한 계획 버전</h4><div id="plans"></div></div></article>
+<article class="card"><h3>실제 집행 기록</h3><p class="help">광고를 집행한 뒤 당시의 계획과 실제 노출 시간을 직접 기록하세요.</p>
+<form id="run" autocomplete="off"><div class="fields"><label class="wide">집행 당시 계획<select name="planId" required></select></label>
+<label>실제 시작<input type="time" name="start" required></label><label>실제 종료<input type="time" name="end" required></label></div><button class="primary">집행 시간 기록</button></form></article></div>
+<article class="card"><h3>광고 실적 수기 입력</h3><p class="help">매체 보고서의 집계 기간을 입력하세요. 빈칸은 미측정이고 0은 확인한 수치입니다.</p>
+<form id="report" autocomplete="off"><div class="fields three">
+<label class="wide">실적을 연결할 집행<select name="runId" required></select></label><label>성과 원천 채널<select name="channel"></select></label>
+<label>집계 시작 · 한국시간<input name="from" type="datetime-local" required></label><label>집계 종료 · 미포함<input name="to" type="datetime-local" required></label>
+<label>기록 광고비 (원)<input name="spend" type="number" min="0" max="100000000"></label><label>노출 (회)<input name="impressions" type="number" min="0" max="100000000"></label><label>클릭 (회)<input name="clicks" type="number" min="0" max="100000000"></label>
+</div><button class="primary">광고 실적 저장</button></form></article></section>
+
+<section class="page" id="page-closing" aria-labelledby="title-closing" hidden><div class="pagehead"><h2 id="title-closing" tabindex="-1">영업 마감</h2></div>
+<article class="card"><h3>방문·매출·관리 시간</h3><p class="help">운영일 하루 전체 기준입니다. 확인한 항목부터 저장하고 마감 후 보완하세요.</p><form id="close" autocomplete="off">
+<div class="columns equal meals"><fieldset><legend>점심</legend><div class="fields"><label>점심 방문 (팀)<input name="lunchTeams" type="number" min="0" max="100000"></label><label>점심 매출 (원)<input name="lunchRevenue" type="number" min="0" max="100000000"></label></div></fieldset>
+<fieldset><legend>저녁</legend><div class="fields"><label>저녁 방문 (팀)<input name="dinnerTeams" type="number" min="0" max="100000"></label><label>저녁 매출 (원)<input name="dinnerRevenue" type="number" min="0" max="100000000"></label></div></fieldset></div>
+<div class="fields three"><label>광고 관리 시간 (분)<input name="minutes" type="number" min="0" max="1440"></label><label>변동비 차감 후 기여율 (%)<input name="margin" type="number" min="0" max="100" step="0.1"></label><label>추가 실험 비용 (원)<input name="extraCost" type="number" min="0" max="100000000"></label></div>
+<button class="primary">마감 기록 저장</button></form></article></section>
+
+<section class="page" id="page-review" aria-labelledby="title-review" hidden><div class="pagehead"><h2 id="title-review" tabindex="-1">공동 판단</h2></div>
+<div class="columns"><article class="card"><h3>근거 확인과 다음 행동</h3><form id="decision" autocomplete="off"><div class="fields">
+<label>검토할 집행<select name="runId"></select></label><label>비교 영업일<input type="date" name="compareDay" required></label></div>
+<label class="check"><input type="checkbox" name="comparable">두 날의 영업시간과 행사 조건을 확인했고 비교할 수 있습니다.</label>
+<div id="recommendation" class="verdict"></div><div id="evidence-metrics" class="mini"></div><p class="help">가정 기여액은 관측한 방문 팀 차이를 모두 광고로 설명한다고 가정한 수치입니다.</p>
+<div class="fields"><label>내 판단<select name="choice"></select></label><label class="wide">판단 근거<textarea name="note" rows="2" maxlength="500" required></textarea></label></div><button class="primary">공동 판단 기록</button></form></article>
+<article class="card"><h3>대표·운영자 의견</h3><form id="opinion" autocomplete="off"><label>운영 의견<textarea name="note" maxlength="500" rows="2" required></textarea></label><button>의견 남기기</button></form><div id="opinions" class="list"></div></article></div>
+<article class="card"><h3>판단·승인 이력</h3><div id="decisions" class="list"></div>
+<form id="approval" autocomplete="off"><div class="fields"><label>승인 대기 판단<select name="decisionId" required></select></label><label>대표 검토 결과<select name="status"><option value="approved">승인</option><option value="deferred">보류</option></select></label><label class="wide">대표 검토 근거<textarea name="note" rows="2" maxlength="300" required></textarea></label></div><button class="primary">대표 검토 저장</button></form><p id="approval-hint" class="help"></p></article></section>
+
+<section class="page" id="page-records" aria-labelledby="title-records" hidden><div class="pagehead"><h2 id="title-records" tabindex="-1">운영 기록 조회</h2><label>조회 단위<select id="period"><option value="day">일간</option><option value="week">주간</option><option value="month">월간</option></select></label></div>
+<p id="range-title" class="help"></p><div id="range-kpis" class="kpis"></div><div class="columns equal"><article class="card"><h3>영업일별 마감</h3><div id="range-days" class="list"></div></article>
+<article class="card"><h3>선택한 영업일의 원장</h3><div id="events" class="list"></div></article></div></section>
+<footer><span>마장동 사천본점 · 한국시간</span><span>MASHCORE LOCAL FLOW · R0.5</span></footer></main>
+</body></html>

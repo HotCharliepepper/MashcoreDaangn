@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141c18"><meta name="color-scheme" content="dark">
+<title>마장동 사천본점 · 운영 일지</title><link rel="icon" href="data:,">
+<link rel="stylesheet" href="./src/style.css"><script type="module" src="./src/app.mjs"></script>
+</head><body>
+<a class="skip" href="#main">본문으로 이동</a>
+<header class="mast"><div class="wrap mast-in"><div class="brand" translate="no"><span class="seal">M</span><span><b>MASHCORE</b><small>LOCAL FLOW</small></span></div>
+<div class="sync-tools"><span id="mode">연결 확인 중</span><button id="sync" type="button">동기화</button></div></div></header>
+<main class="wrap" id="main" tabindex="-1">
+<div class="heading"><div><p class="kicker">F&amp;B 운영 일지</p><h1>마장동 사천본점</h1></div><div class="account"><span id="account"></span><label id="demo-role-label" hidden>데모 역할<select id="demo-role"><option value="mashcore">Mashcore</option><option value="owner">대표</option></select></label></div></div>
+<div class="datebar"><label>영업일<input id="day" type="date" required></label><div class="date-actions"><button id="prev" aria-label="이전 영업일">‹</button><button id="today">오늘</button><button id="next-day" aria-label="다음 영업일">›</button></div><p id="synced">동기화 대기</p></div>
+<nav aria-label="운영 메뉴" id="nav">
+<a href="#today" data-tab="today"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12 12 4l9 8M5 11v9h14v-9M10 20v-6h4v6"/></svg>오늘</a>
+<a href="#ads" data-tab="ads"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h6l11-5v14L9 14H3zM6 14l2 6h3l-2-6"/></svg>광고</a>
+<a href="#closing" data-tab="closing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v6q3 4 6 0V3M7 3v18M19 3q-5 3-5 10h5v8M19 3v10"/></svg>마감</a>
+<a href="#review" data-tab="review"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 16 2-7 7-2-2 7z"/></svg>판단</a>
+<a href="#records" data-tab="records"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4v16h18M7 16v-4m5 4V8m5 8V5"/></svg>조회</a>
+</nav>
+<div class="notice"><div id="feedback" role="status" aria-live="polite"></div>
+<div id="problem" role="alert" hidden></div><div class="recovery"><button id="retry" hidden>같은 저장 요청 재시도</button><button id="resolve" hidden>충돌 입력을 버리고 최신본 열기</button></div></div>
+<noscript>운영 일지 사용을 위해 자바스크립트를 켜세요.</noscript>
+<section class="page" id="page-today" aria-labelledby="title-today"><div class="pagehead"><h2 id="title-today" tabindex="-1">오늘의 흐름</h2><a href="#records">기간 조회 ↗</a></div>
+<div class="kpis" id="today-kpis"></div><div class="columns">
+<article class="card"><div class="cardhead"><h3>광고 타임테이블</h3><a href="#ads">계획 편집 ↗</a></div><div class="legend"><span class="planned">광고 계획</span><span class="actual">기록한 집행</span></div><div id="timeline"></div></article>
+<aside class="card accent"><h3>영업일 체크</h3><div id="checklist"></div></aside></div></section>
+
+<section class="page" id="page-ads" aria-labelledby="title-ads" hidden><div class="pagehead"><h2 id="title-ads" tabindex="-1">광고 운영</h2></div>
+<div class="columns equal"><article class="card"><h3>소재·시간·예산 계획</h3><form id="plan" autocomplete="off"><div class="fields">
+<label>계획 채널<select name="channel"></select></label><label>계획 예산 (원)<input name="budget" type="number" min="0" max="10000000" required></label>
+<label>광고 시작<input name="start" type="time" required></label><label>광고 종료<input name="end" type="time" required></label>
+<label class="wide">소재 제목<input name="creative" maxlength="100" required></label><label class="wide">확인할 가설<textarea name="hypothesis" maxlength="300" rows="2" required></textarea></label></div>
+<button class="primary">계획 버전 저장</button></form><div class="subsection"><h4>저장한 계획 버전</h4><div id="plans"></div></div></article>
+<article class="card"><h3>실제 집행 기록</h3><p class="help">광고를 집행한 뒤 당시의 계획과 실제 노출 시간을 직접 기록하세요.</p>
+<form id="run" autocomplete="off"><div class="fields"><label class="wide">집행 당시 계획<select name="planId" required></select></label>
+<label>실제 시작<input type="time" name="start" required></label><label>실제 종료<input type="time" name="end" required></label></div><button class="primary">집행 시간 기록</button></form></article></div>
+<article class="card"><h3>광고 실적 수기 입력</h3><p class="help">매체 보고서의 집계 기간을 입력하세요. 빈칸은 미측정이고 0은 확인한 수치입니다.</p>
+<form id="report" autocomplete="off"><div class="fields three">
+<label class="wide">실적을 연결할 집행<select name="runId" required></select></label><label>성과 원천 채널<select name="channel"></select></label>
+<label>집계 시작 · 한국시간<input name="from" type="datetime-local" required></label><label>집계 종료 · 미포함<input name="to" type="datetime-local" required></label>
+<label>기록 광고비 (원)<input name="spend" type="number" min="0" max="100000000"></label><label>노출 (회)<input name="impressions" type="number" min="0" max="100000000"></label><label>클릭 (회)<input name="clicks" type="number" min="0" max="100000000"></label>
+</div><button class="primary">광고 실적 저장</button></form></article></section>
+
+<section class="page" id="page-closing" aria-labelledby="title-closing" hidden><div class="pagehead"><h2 id="title-closing" tabindex="-1">영업 마감</h2></div>
+<article class="card"><h3>방문·매출·관리 시간</h3><p class="help">운영일 하루 전체 기준입니다. 확인한 항목부터 저장하고 마감 후 보완하세요.</p><form id="close" autocomplete="off">
+<div class="columns equal meals"><fieldset><legend>점심</legend><div class="fields"><label>점심 방문 (팀)<input name="lunchTeams" type="number" min="0" max="100000"></label><label>점심 매출 (원)<input name="lunchRevenue" type="number" min="0" max="100000000"></label></div></fieldset>
+<fieldset><legend>저녁</legend><div class="fields"><label>저녁 방문 (팀)<input name="dinnerTeams" type="number" min="0" max="100000"></label><label>저녁 매출 (원)<input name="dinnerRevenue" type="number" min="0" max="100000000"></label></div></fieldset></div>
+<div class="fields three"><label>광고 관리 시간 (분)<input name="minutes" type="number" min="0" max="1440"></label><label>변동비 차감 후 기여율 (%)<input name="margin" type="number" min="0" max="100" step="0.1"></label><label>추가 실험 비용 (원)<input name="extraCost" type="number" min="0" max="100000000"></label></div>
+<button class="primary">마감 기록 저장</button></form></article></section>
+
+<section class="page" id="page-review" aria-labelledby="title-review" hidden><div class="pagehead"><h2 id="title-review" tabindex="-1">공동 판단</h2></div>
+<div class="columns"><article class="card"><h3>근거 확인과 다음 행동</h3><form id="decision" autocomplete="off"><div class="fields">
+<label>검토할 집행<select name="runId"></select></label><label>비교 영업일<input type="date" name="compareDay" required></label></div>
+<label class="check"><input type="checkbox" name="comparable">두 날의 영업시간과 행사 조건을 확인했고 비교할 수 있습니다.</label>
+<div id="recommendation" class="verdict"></div><div id="evidence-metrics" class="mini"></div><p class="help">가정 기여액은 관측한 방문 팀 차이를 모두 광고로 설명한다고 가정한 수치입니다.</p>
+<div class="fields"><label>내 판단<select name="choice"></select></label><label class="wide">판단 근거<textarea name="note" rows="2" maxlength="500" required></textarea></label></div><button class="primary">공동 판단 기록</button></form></article>
+<article class="card"><h3>대표·운영자 의견</h3><form id="opinion" autocomplete="off"><label>운영 의견<textarea name="note" maxlength="500" rows="2" required></textarea></label><button>의견 남기기</button></form><div id="opinions" class="list"></div></article></div>
+<article class="card"><h3>판단·승인 이력</h3><div id="decisions" class="list"></div>
+<form id="approval" autocomplete="off"><div class="fields"><label>승인 대기 판단<select name="decisionId" required></select></label><label>대표 검토 결과<select name="status"><option value="approved">승인</option><option value="deferred">보류</option></select></label><label class="wide">대표 검토 근거<textarea name="note" rows="2" maxlength="300" required></textarea></label></div><button class="primary">대표 검토 저장</button></form><p id="approval-hint" class="help"></p></article></section>
+
+<section class="page" id="page-records" aria-labelledby="title-records" hidden><div class="pagehead"><h2 id="title-records" tabindex="-1">운영 기록 조회</h2><label>조회 단위<select id="period"><option value="day">일간</option><option value="week">주간</option><option value="month">월간</option></select></label></div>
+<p id="range-title" class="help"></p><div id="range-kpis" class="kpis"></div><div class="columns equal"><article class="card"><h3>영업일별 마감</h3><div id="range-days" class="list"></div></article>
+<article class="card"><h3>선택한 영업일의 원장</h3><div id="events" class="list"></div></article></div></section>
+<footer><span>마장동 사천본점 · 한국시간</span><span>MASHCORE LOCAL FLOW · R0.5</span></footer></main>
+</body></html>
